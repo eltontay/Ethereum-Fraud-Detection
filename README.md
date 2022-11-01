@@ -15,3 +15,5 @@ The original dataset is downloaded from https://www.kaggle.com/datasets/vagifa/e
 ### `Etherscan`
 
 Additional data are mined from etherscan from https://api.etherscan.io and
+
+retrieve script from calvin where he mined the addresses from etherscan
