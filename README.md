@@ -81,3 +81,30 @@ There are 2 data sources : `Kaggle` and `Etherscan`
 ### Stacked Ensemble Model with Time Series
 
 `/Models/Final_Stacking_Model_w_ts.ipynb`
+
+---
+
+## Model Performance without Time Series
+
+| Model                    | F1     | Recall | Precision | Accuracy | Time taken | ROC-AUC | Optimal Parameters                                                                                                                                            |
+| :----------------------- | :----- | :----- | :-------- | :------- | :--------- | :------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Logistic Regression      | 0.8360 | 0.8420 | 0.8301    | 0.8479   | 84.85      | 0.8475  | ‘C’:1000, ‘penalty’:’l1’, ‘solver’:’liblinear’                                                                                                                |
+| Naive Bayes              | 0.7797 | 0.8241 | 0.7398    | 0.7855   | 1.54       | 0.7883  | ‘Var_smoothing’: 0.0533669923120631                                                                                                                           |
+| SVM                      | 0.9243 | 0.9149 | 0.9340    | 0.9427   | 3.28       | 0.9374  | 'C':1000,'gamma':1                                                                                                                                            |
+| XGBoost                  | 0.9358 | 0.9177 | 0.9546    | 0.9519   | 2.79       | 0.9453  | 'learning_rate':0.05,'max_depth':8,'n_estimators':1000                                                                                                        |
+| MLP                      | 0.8505 | 0.8346 | 0.8670    | 0.8879   | 1.91       | 0.8777  | 'input_dim':12,'H':60,'activation':'relu','dropout_probability':0.2,'num_epochs':75, 'num_layers':10                                                          |
+| TabNet                   | 0.9147 | 0.8903 | 0.9405    | 0.9366   | 56.93      | 0.9277  | 'gamma':1.0,'lambda_sparse':0, 'momentum':0.4, 'n_steps':8, 'optimizer_params':'lr': 0.025                                                                    |
+| LightGBM                 | 0.9376 | 0.9198 | 0.9561    | 0.9532   | 0.06       | 0.9468  | 'bagging_fraction':0.95, 'bagging_freq':1, 'feature_fraction':0.95, 'learning_rate':0.2, 'max_bin':300, 'max_depth':6, 'min_gain_to_split':0, 'num_leaves':20 |
+| Stacking                 | 0.9371 | 0.9226 | 0.9521    | 0.9527   | 198.35     | 0.9469  | SVM, XGBoost, MLP, Tabnet and LightGBM                                                                                                                        |
+| Stacking (excluding MLP) | 0.9379 | 0.9240 | 0.9521    | 0.9532   | 185.72     | 0.9476  | SVM, XGBoost, Tabnet and LightGBM                                                                                                                             |
+
+## Model Performance with Time Series
+
+| Model    | F1     | Recall | Precision | Accuracy | Time taken | ROC-AUC | Optimal Parameters                                                                                                                                            |
+| :------- | :----- | :----- | :-------- | :------- | :--------- | :------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| SVM      | 0.9208 | 0.9220 | 0.9196    | 0.9284   | 5.43       | 0.9278  | 'C':1000,'gamma':1                                                                                                                                            |
+| XGBoost  | 0.9323 | 0.9310 | 0.9335    | 0.9389   | 7.74       | 0.9383  | 'learning_rate':0.05, 'max_depth':8,'n_estimators':1000                                                                                                       |
+| MLP      | 0.8364 | 0.8079 | 0.8668    | 0.8573   | 2.43       | 0.8529  | 'input_dim':12,'H':60,'activation':'relu' ,'dropout_probability':0.2,'num_epochs':75, 'num_layers':10                                                         |
+| TabNet   | 0.8968 | 0.8578 | 0.9396    | 0.9109   | 89.65      | 0.9062  | 'gamma':1.0,'lambda_sparse':0, 'momentum':0.4, 'n_steps':8, 'optimizer_params':'lr': 0.025                                                                    |
+| LightGBM | 0.9314 | 0.9326 | 0.9302    | 0.9379   | 0.012      | 0.9375  | 'bagging_fraction':0.95, 'bagging_freq':1, 'feature_fraction':0.95, 'learning_rate':0.2, 'max_bin':300, 'max_depth':6, 'min_gain_to_split':0, 'num_leaves':20 |
+| Stacking | 0.9323 | 0.9347 | 0.9298    | 0.9387   | 311.96     | 0.9383  | SVM, XGBoost, MLP, Tabnet and LightGBM                                                                                                                        |
